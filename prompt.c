@@ -1,4 +1,4 @@
-#include "shell"
+#include "shell.h"
 
 /**
  * prompt - Displays shell prompt
@@ -8,7 +8,7 @@
 char *prompt(void)
 {
 	char *buff = NULL;
-	ssize_t n = 0;
+	size_t n = 0;
 
 	write(1, "($) ", 4);
 

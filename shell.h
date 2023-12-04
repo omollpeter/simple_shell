@@ -14,6 +14,6 @@
 char *prompt(void);
 char **parser(char *str, char *delim);
 size_t token_count(char *str, char *delim);
-void execute(char **argv);
+void executor(char **argv);
 
 #endif /* SIMPLE_SHELL_H */

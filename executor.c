@@ -3,6 +3,7 @@
 /**
  * executor - Executes the given command
  * @argv: Command table
+ * @av: program parameters
  *
  * Return: void
  */
@@ -19,7 +20,7 @@ void executor(char **argv, char **av)
 	}
 	if (pid == 0)
 	{
-		if(execve(argv[0], argv, NULL) == -1)
+		if (execve(argv[0], argv, NULL) == -1)
 		{
 			perror(av[0]);
 			exit(98);

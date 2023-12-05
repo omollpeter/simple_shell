@@ -2,10 +2,13 @@
 
 /**
  * main - Checks code
+ * @ac: argument count
+ * @av: program parameters
+ * @env: array of environment variables
  *
  * Return: 0 (Success)
  */
-int main(int __attribute__((unused))ac, char **av, char __attribute__((unused))**env)
+int main(int __attribute__((unused))ac, char **av, char **env)
 {
 	char *str, **argv;
 
@@ -18,9 +21,12 @@ int main(int __attribute__((unused))ac, char **av, char __attribute__((unused))*
 		argv = parser(str, " \n");
 		if (strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
 			check_exit_arg(argv[1], av);
-		if (strcmp(argv[0], "exit") == 0)
+		else if (strcmp(argv[0], "exit") == 0)
 			exit(0);
-		executor(argv, av);
+		else if (strcmp(argv[0], "env") == 0 && argv[1] == NULL)
+			list_env_vars(env);
+		else
+			executor(argv, av);
 	}
 
 	return (0);

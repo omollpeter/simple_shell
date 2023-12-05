@@ -3,6 +3,7 @@
 /**
  * check_exit_arg - Checks argument passed to exit
  * @str: Argument
+ * @av: command line arguments
  *
  * Return: void
  */

@@ -5,7 +5,7 @@
  *
  * Return: 0 (Success)
  */
-int main(int __attribute__((unused))ac, char __attribute__((unused))**av, char __attribute__((unused))**env)
+int main(int __attribute__((unused))ac, char **av, char __attribute__((unused))**env)
 {
 	char *str, **argv;
 
@@ -16,7 +16,7 @@ int main(int __attribute__((unused))ac, char __attribute__((unused))**av, char _
 			str = prompt();
 
 		argv = parser(str, " \n");
-		executor(argv);
+		executor(argv, av);
 	}
 
 	return (0);

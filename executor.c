@@ -6,7 +6,7 @@
  *
  * Return: void
  */
-void executor(char **argv)
+void executor(char **argv, char **av)
 {
 	pid_t pid;
 	int status;
@@ -21,7 +21,7 @@ void executor(char **argv)
 	{
 		if(execve(argv[0], argv, NULL) == -1)
 		{
-			perror("Execve failed\n");
+			perror(av[0]);
 			exit(98);
 		}
 	}

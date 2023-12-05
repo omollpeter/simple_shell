@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <sys/errno.h>
 
+void check_exit_arg(char *str, char **av);
 char *prompt(void);
 char **parser(char *str, char *delim);
 size_t token_count(char *str, char *delim);

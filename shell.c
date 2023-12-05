@@ -16,6 +16,10 @@ int main(int __attribute__((unused))ac, char **av, char __attribute__((unused))*
 			str = prompt();
 
 		argv = parser(str, " \n");
+		if (strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
+			check_exit_arg(argv[1], av);
+		if (strcmp(argv[0], "exit") == 0)
+			exit(0);
 		executor(argv, av);
 	}
 

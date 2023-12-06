@@ -10,7 +10,7 @@
  */
 int main(int __attribute__((unused))ac, char **av, char **env)
 {
-	char *str, **argv;
+	char *str, **argv, buffer[256];
 
 	while (isatty(0))
 	{
@@ -27,6 +27,13 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 			list_env_vars(env);
 		else
 			executor(argv, av);
+	}
+
+
+	while (fgets(buffer, 255, stdin) != NULL)
+	{
+		argv = parser(buffer, " \n");
+		executor(argv, av);
 	}
 
 	return (0);

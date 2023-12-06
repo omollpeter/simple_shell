@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/errno.h>
+#include <dirent.h>
 
 int _print_char(char c);
 void check_exit_arg(char *str, char **av);
@@ -17,8 +18,9 @@ void list_env_vars(char **env);
 char *prompt(void);
 char **parser(char *str, char *delim);
 size_t token_count(char *str, char *delim);
-void executor(char **argv, char **av);
+void executor(char *exec, char **argv, char **av);
 char *_getenv(char *name, char **env);
 char *path_to_exec(char *path_dirs, char *exec);
+int file_status(char *command);
 
 #endif /* SIMPLE_SHELL_H */

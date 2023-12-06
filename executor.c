@@ -7,7 +7,7 @@
  *
  * Return: void
  */
-void executor(char **argv, char **av)
+void executor(char *exec, char **argv, char **av)
 {
 	pid_t pid;
 	int status;
@@ -20,7 +20,7 @@ void executor(char **argv, char **av)
 	}
 	if (pid == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execve(exec, argv, NULL) == -1)
 		{
 			perror(av[0]);
 			exit(98);

@@ -22,5 +22,6 @@ void executor(char *exec, char **argv, char **av);
 char *_getenv(char *name, char **env);
 char *path_to_exec(char *path_dirs, char *exec);
 int file_status(char *command);
+void free_array_str(char **str);
 
 #endif /* SIMPLE_SHELL_H */

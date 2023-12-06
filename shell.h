@@ -19,5 +19,6 @@ char **parser(char *str, char *delim);
 size_t token_count(char *str, char *delim);
 void executor(char **argv, char **av);
 char *_getenv(char *name, char **env);
+char *path_to_exec(char *path_dirs, char *exec);
 
 #endif /* SIMPLE_SHELL_H */

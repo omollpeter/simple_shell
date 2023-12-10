@@ -15,14 +15,18 @@ char *path_to_exec(char *path_dirs, char *exec)
 	size_t len1, len2;
 
 	arr_path_dirs = parser(path_dirs, ":");
+	free(path_dirs);
 	while (arr_path_dirs[i])
 	{
 		struct dirent *dir;
 
 		dp = opendir(arr_path_dirs[i]);
 		if (!dp)
+		{
+			closedir(dp);
+			free_array_str(arr_path_dirs);
 			return (NULL);
-
+		}
 		while ((dir = readdir(dp)) != NULL)
 		{
 			if (strcmp(dir->d_name, exec) == 0)
@@ -37,11 +41,13 @@ char *path_to_exec(char *path_dirs, char *exec)
 				strcat(path, exec);
 
 				closedir(dp);
+				free_array_str(arr_path_dirs);
 				return (path);
 			}
 		}
 		i++;
 	}
 	closedir(dp);
+	free_array_str(arr_path_dirs);
 	return (NULL);
 }

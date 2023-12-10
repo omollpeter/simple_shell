@@ -10,41 +10,42 @@
  */
 int main(int __attribute__((unused))ac, char **av, char **env)
 {
-	char *str, **argv, buffer[256], *path, *path_dirs;
-	int found;
+	char *str, buffer[256];
+	int len, i, mode = 0;
 
 	while (isatty(0))
 	{
+		mode = 1;
 		str = prompt();
 		while (strlen(str) == 1 && str[0] == '\n')
 			str = prompt();
+		len = (int) strlen(str);
 
-		argv = parser(str, " \n");
-		if (strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
-			check_exit_arg(argv[1], av);
-		else if (strcmp(argv[0], "exit") == 0)
-			exit(0);
-		else if (strcmp(argv[0], "env") == 0 && argv[1] == NULL)
-			list_env_vars(env);
-		else
+		str[len - 1] = '\0';
+		if (check_semi_colon(str))
 		{
-			found = file_status(argv[0]);
-			if (found == 0)
-				executor(argv[0], argv, av);
-			else
+			char **arr_cmds = parser(str, ";");
+
+			free(str);
+			i = 0;
+
+			while (arr_cmds[i])
 			{
-				path_dirs = _getenv("PATH", env);
-				path = path_to_exec(path_dirs, argv[0]);
-				executor(path, argv, av);
+				run_cmd(arr_cmds[i], av, env, mode);
+				i++;
 			}
 		}
+		else
+			run_cmd(str, av, env, mode);
 	}
-
 
 	while (fgets(buffer, 255, stdin) != NULL)
 	{
-		argv = parser(buffer, " \n");
-	}
+		len = (int) strlen(buffer);
 
+		if (buffer[len - 1] == '\n')
+			buffer[len - 1] = '\0';
+		run_cmd(buffer, av, env, mode);
+	}
 	return (0);
 }

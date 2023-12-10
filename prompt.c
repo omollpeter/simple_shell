@@ -13,7 +13,9 @@ char *prompt(void)
 	write(1, "($) ", 4);
 
 	while (getline(&buff, &n, stdin) != -1)
+	{
 		return (buff);
+	}
 
 	perror("getline\n");
 	return (NULL);

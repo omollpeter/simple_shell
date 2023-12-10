@@ -3,9 +3,9 @@
  * list_env_vars - lists all the environment variables
  * @env: array of enviroment variables
  *
- * Return: Void
+ * Return: 0 Success
  */
-void list_env_vars(char **env)
+int list_env_vars(char **env)
 {
 	int i = 0;
 
@@ -15,4 +15,5 @@ void list_env_vars(char **env)
 		_print_char('\n');
 		i++;
 	}
+	return (0);
 }

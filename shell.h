@@ -13,15 +13,24 @@
 #include <dirent.h>
 
 int _print_char(char c);
-void check_exit_arg(char *str, char **av);
-void list_env_vars(char **env);
+void exit_str_arg(char *str, char **av);
+int list_env_vars(char **env);
 char *prompt(void);
 char **parser(char *str, char *delim);
 size_t token_count(char *str, char *delim);
-void executor(char *exec, char **argv, char **av);
+int executor(char *exec, char **argv, char **av);
 char *_getenv(char *name, char **env);
 char *path_to_exec(char *path_dirs, char *exec);
 int file_status(char *command);
 void free_array_str(char **str);
+char **create_arr(char *str);
+int check_delim(char *str, char *delim);
+int check_bltn(char *cmd);
+int execute_bltn(char **argv, char **av, char **env);
+int run_cmd(char *str_cmd, char **av, char **env, int mode);
+int check_semi_colon(char *str);
+int ch_dir(char *path, char **env);
+char **_sentenv(char **env, char *name, char *value, int overwrite);
+int env_position(char *name, char **env);
 
 #endif /* SIMPLE_SHELL_H */

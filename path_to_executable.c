@@ -47,7 +47,6 @@ char *path_to_exec(char *path_dirs, char *exec)
 		closedir(dp);
 		i++;
 	}
-	closedir(dp);
 	free_array_str(arr_path_dirs);
 	return (NULL);
 }

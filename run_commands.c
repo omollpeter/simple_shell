@@ -35,7 +35,6 @@ int run_cmd(char *str_cmd, char **av, char **env, int mode)
 				write(2, ": 1: ", 5);
 				write(2, argv[0], strlen(argv[0]));
 				write(2, ": Permission denied\n", 20);
-				free_array_str(argv);
 				result = -1;
 			}
 		}

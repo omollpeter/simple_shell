@@ -18,7 +18,12 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 		mode = 1;
 		str = prompt();
 		while (strlen(str) == 1 && str[0] == '\n')
+		{
+			char *temp_str = str;
+
+			free(temp_str);
 			str = prompt();
+		}
 		len = (int) strlen(str);
 
 		str[len - 1] = '\0';

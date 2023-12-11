@@ -25,7 +25,6 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 			str = prompt();
 		}
 		len = (int) strlen(str);
-
 		str[len - 1] = '\0';
 		if (check_semi_colon(str))
 		{
@@ -33,7 +32,6 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 
 			free(str);
 			i = 0;
-
 			while (arr_cmds[i])
 			{
 				run_cmd(arr_cmds[i], av, env, mode);
@@ -43,11 +41,11 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 		else
 			run_cmd(str, av, env, mode);
 	}
-
 	while (fgets(buffer, 255, stdin) != NULL)
 	{
 		len = (int) strlen(buffer);
-
+		if (buffer[0] == '\n')
+			continue;
 		if (buffer[len - 1] == '\n')
 			buffer[len - 1] = '\0';
 		run_cmd(buffer, av, env, mode);

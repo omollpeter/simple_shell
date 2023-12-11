@@ -7,16 +7,19 @@
  */
 char *prompt(void)
 {
-	char *buff = NULL;
-	size_t n = 0;
+	char buff[512], *str;
 
 	write(1, "($) ", 4);
 
-	while (getline(&buff, &n, stdin) != -1)
+	if (fgets(buff, 511, stdin) != NULL)
 	{
-		return (buff);
+		str = malloc(sizeof(char) * (strlen(buff) + 1));
+		if (!str)
+			exit(0);
+		strcpy(str, buff);
+		return (str);
 	}
 
-	perror("getline\n");
-	return (NULL);
+	_print_char('\n');
+	exit(0);
 }

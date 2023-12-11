@@ -39,7 +39,6 @@ char *path_to_exec(char *path_dirs, char *exec)
 				strcpy(path, arr_path_dirs[i]);
 				strcat(path, "/");
 				strcat(path, exec);
-
 				closedir(dp);
 				free_array_str(arr_path_dirs);
 				return (path);

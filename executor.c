@@ -3,34 +3,29 @@
 /**
  * executor - Executes the given command
  * @argv: Command table
- * @av: program parameters
+ * @env: enviroment variables
  * @exec: Path to the executable file
  *
  * Return: 0 on success, -1 otherwise
  */
-int executor(char *exec, char **argv, char **av)
+int executor(char *exec, char **argv, char **env)
 {
 	pid_t pid;
-	int status;
+	int status, result = 0;
 
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("Fork failed\n");
-		return (-1);
+		result = -1;
 	}
 	if (pid == 0)
 	{
-		if (execve(exec, argv, NULL) == -1)
-		{
-			perror(av[0]);
-			return (-1);
-		}
+		result = execve(exec, argv, env);
 	}
 	else
 	{
 		wait(&status);
-		return (0);
 	}
-	return (-1);
+	return (result);
 }

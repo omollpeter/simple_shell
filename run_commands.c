@@ -33,7 +33,7 @@ int run_cmd(char *str_cmd, char **av, char **env, int mode)
 		if (found == 0)
 		{
 			if (access(argv[0], X_OK) == 0)
-				result =  (executor(argv[0], argv, av));
+				result =  (executor(argv[0], argv, env));
 			else
 			{
 				write(2, av[0], strlen(av[0]));
@@ -57,7 +57,7 @@ int run_cmd(char *str_cmd, char **av, char **env, int mode)
 			}
 			else
 			{
-				result = (executor(path, argv, av));
+				result = (executor(path, argv, env));
 				free(path);
 			}
 		}

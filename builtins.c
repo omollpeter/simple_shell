@@ -14,7 +14,7 @@ int check_bltn(char *cmd)
 	while (builtins[i])
 	{
 		if (strcmp(builtins[i], cmd) == 0)
-		return (1);
+			return (1);
 		i++;
 	}
 	return (0);

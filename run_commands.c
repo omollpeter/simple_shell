@@ -17,7 +17,12 @@ int run_cmd(char *str_cmd, char **av, char **env, int mode)
 	argv = parser(str_cmd, " ");
 	if (mode == 1)
 		free(str_cmd);
-	if (check_bltn(argv[0]))
+	if (!argv[0])
+	{
+		free(argv);
+		return (0);
+	}
+	else if (check_bltn(argv[0]))
 	{
 		result = execute_bltn(argv, av, env);
 		return (result);
@@ -59,4 +64,45 @@ int run_cmd(char *str_cmd, char **av, char **env, int mode)
 	}
 	free_array_str(argv);
 	return (result);
+}
+
+/**
+ * run_chain_cmds - Checks if a command is chained or not then runs it
+ * @str: Command that is checked
+ * @av: Program parameters
+ * @env: Environment variables
+ * @mode: Interactive or non-interactive
+ *
+ * Return: void
+ */
+void run_chain_cmds(char *str, char **av, char **env, int mode)
+{
+	int i;
+
+	if (check_semi_colon(str))
+	{
+		char **arr_cmds = parser(str, ";");
+
+		if (mode)
+			free(str);
+		i = 0;
+		while (arr_cmds[i])
+		{
+			if (strcmp(arr_cmds[i], "exit") == 0)
+			{
+				while (arr_cmds[i])
+				{
+					free(arr_cmds[i]);
+					i++;
+				}
+				free(arr_cmds);
+				exit(0);
+			}
+			run_cmd(arr_cmds[i], av, env, mode);
+			i++;
+		}
+		free(arr_cmds);
+	}
+	else
+		run_cmd(str, av, env, mode);
 }

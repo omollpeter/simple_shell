@@ -37,5 +37,6 @@ int env_position(char *name, char **env);
 void run_chain_cmds(char *str, char **av, char **env, int mode);
 void interactive_mode(char **av, char **env, int mode);
 void non_interactive_mode(char **av, char **env, int mode);
+int exec_cmds_in_file(char **av, char **env, int mode);
 
 #endif /* SIMPLE_SHELL_H */

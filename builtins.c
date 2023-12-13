@@ -38,6 +38,8 @@ int execute_bltn(char **argv, char **av, char **env)
 
 		for (i = 0; argv[1][i]; i++)
 		{
+			if (i == 0 && argv[1][i] == '-')
+				continue;
 			if (argv[1][i] < 48 || argv[1][i] > 57)
 				not_int++;
 		}

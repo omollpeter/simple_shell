@@ -8,10 +8,14 @@
  *
  * Return: 0 (Success)
  */
-int main(int __attribute__((unused))ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
 	int mode = 0;
 
+	if (ac == 2)
+	{
+		return (exec_cmds_in_file(av, env, mode));
+	}
 	while (isatty(0))
 	{
 		mode = 1;
